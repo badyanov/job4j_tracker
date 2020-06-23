@@ -6,6 +6,10 @@ package ru.job4j.oop;
  * @author d.badyanov@outlook.com
  */
 public class Battery {
+    /**
+     * Если true значит батарея при подзарадке отдает весь заряд и может заряжать > 100%
+     */
+    private static final boolean OVERLOADING = true;
     private int load;
 
     public Battery(int load) {
@@ -27,6 +31,9 @@ public class Battery {
      */
     public void exchange(Battery another) {
         int delta = Math.min(100 - another.load, this.load);
+        if (Battery.OVERLOADING) {
+            delta = this.load;
+        }
         this.load = this.load - delta;
         another.load = another.load + delta;
     }
@@ -36,7 +43,6 @@ public class Battery {
         Battery second = new Battery(30);
         printStatus(first, second);
 
-        // первая - 85%, вторая - 30%. вторая батарея должна зарядиться до 100% и забрать 70% у первой
         first.exchange(second);
         printStatus(first, second);
     }
