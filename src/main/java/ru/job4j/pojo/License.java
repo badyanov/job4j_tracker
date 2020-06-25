@@ -1,6 +1,7 @@
 package ru.job4j.pojo;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 2. Модель данных. [#285781]
@@ -41,5 +42,27 @@ public class License {
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    /**
+     * 4. Сравнение моделей. Метод equals [#285783]
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        License license = (License) o;
+        return Objects.equals(owner, license.owner) &&
+                Objects.equals(model, license.model) &&
+                Objects.equals(code, license.code) &&
+                Objects.equals(created, license.created);
+    }
+
+    /**
+     * 4. Сравнение моделей. Метод equals [#285783]
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(owner, model, code, created);
     }
 }
