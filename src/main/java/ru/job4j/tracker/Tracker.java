@@ -16,24 +16,13 @@ public class Tracker {
     /**
      * 5. Tracker - хранилище [#285788]
      * Метод находит все ненулевые заявки из массива items и возвращает их в виде массива
-     * Так как массив items может быть фрагментирован, сначала производится группировка элементов
-     * в отдельном массиве.
-     * Предполагается, что объект Tracker содержит поле size которое хранит всегда актуальное количество заявок,
-     * поэтому массив для группировки элементов сразу создается с нужным размером и не требует обрезки
+     * Объект Tracker содержит поле size которое хранит всегда актуальное количество заявок,
+     * !предполагается, что массив не должен быть фрагментирован!
      *
      * @return массив заполненных заявок (Item)
      */
     public Item[] findAll() {
-        int newIndex = 0;
-        Item[] itemsWithoutNull = new Item[size];
-        for (int i = 0; i < items.length; i++) {
-            if (items[i] == null) {
-                continue;
-            }
-            itemsWithoutNull[newIndex] = items[i];
-            newIndex++;
-        }
-        return itemsWithoutNull;
+        return Arrays.copyOf(items, size);
     }
 
     /**
@@ -46,7 +35,7 @@ public class Tracker {
     public Item[] findByName(String key) {
         int newIndex = 0;
         Item[] results = new Item[size];
-        for (int i = 0; i < items.length; i++) {
+        for (int i = 0; i < size; i++) {
             Item item = items[i];
             if ((item != null) && (item.getName().equalsIgnoreCase(key))) {
                 results[newIndex] = item;
