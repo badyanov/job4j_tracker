@@ -32,6 +32,24 @@ public class Tracker {
     }
 
     /**
+     * 7. Метод удаления заявки Tracker.delete [#285786]
+     * Удаление элемента и последующая дефрагментация массива заявок
+     * @param id удаляемого элемента
+     * @return true если элемент удален, false - если элемент не найден по id
+     */
+    public boolean delete(int id) {
+        int index = indexOf(id);
+        if (index == -1) {
+            return false;
+        }
+        int lengthOfTail = size - index;
+        System.arraycopy(items, index + 1, items, index, lengthOfTail);
+        items[size - 1] = null;
+        size--;
+        return true;
+    }
+
+    /**
      * 5. Tracker - хранилище [#285788]
      * Метод находит все ненулевые заявки из массива items и возвращает их в виде массива
      * Объект Tracker содержит поле size которое хранит всегда актуальное количество заявок,

@@ -30,5 +30,10 @@ public class StartUI {
         System.out.println("\t5. Замена заявки:");
         tracker.replace(2, new Item("Заменить заявку с id = 2"));
         System.out.println(Arrays.toString(tracker.findAll()));
+
+        // 7. Метод удаления заявки Tracker.delete [#285786]
+        System.out.println("\t6. Удаление заявки:");
+        tracker.delete(2);
+        System.out.println(Arrays.toString(tracker.findAll()));
     }
 }
