@@ -4,6 +4,10 @@ public class Item {
     private int id;
     private String name;
 
+    public Item() {
+        this.name = "<new>";
+    }
+
     public Item(String name) {
         this.name = name;
     }

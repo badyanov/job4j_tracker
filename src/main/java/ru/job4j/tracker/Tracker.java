@@ -14,6 +14,24 @@ public class Tracker {
     }
 
     /**
+     * 6. Метод замены заявки. Tracker.replace [#285785]
+     * @param id - идентификатор заменяемой заявки
+     * @param item - заменяемая заявка
+     * @return Возвращает true, если замена произведена или false, если index по id не найден.
+     */
+    public boolean replace(int id, Item item) {
+        int index = indexOf(id);
+        if (index == -1) {
+            return false;
+        }
+        Item prevItem = items[index];
+        int prevId = prevItem.getId();
+        item.setId(prevId);
+        items[index] = item;
+        return true;
+    }
+
+    /**
      * 5. Tracker - хранилище [#285788]
      * Метод находит все ненулевые заявки из массива items и возвращает их в виде массива
      * Объект Tracker содержит поле size которое хранит всегда актуальное количество заявок,
@@ -46,11 +64,15 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        Item rsl = null;
+        int index = indexOf(id);
+        return index != -1 ? items[index] : null;
+    }
+
+    private int indexOf(int id) {
+        int rsl = -1;
         for (int index = 0; index < size; index++) {
-            Item item = items[index];
-            if (item.getId() == id) {
-                rsl = item;
+            if (items[index].getId() == id) {
+                rsl = index;
                 break;
             }
         }
