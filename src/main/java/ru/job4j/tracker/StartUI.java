@@ -1,39 +1,36 @@
 package ru.job4j.tracker;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 /**
- * 5. Tracker - хранилище [#285788]
+ * 2.1. Реализация класса StartUI [#285731]
  */
 public class StartUI {
+    public void init(Scanner scanner, Tracker tracker) {
+        boolean run = true;
+        while (run) {
+            this.showMenu();
+            run = false;
+        }
+    }
+
+    private void showMenu() {
+        System.out.println("=== Tracker's Menu ===");
+        System.out.println("0. Add new item");
+        System.out.println("1. Show all items");
+        System.out.println("2. Edit item");
+        System.out.println("3. Delete item");
+        System.out.println("4. Find item by ID");
+        System.out.println("5. Find items by name");
+        System.out.println("6. Exit tracker");
+        System.out.println("======================");
+        System.out.print("Select: ");
+    }
+
     public static void main(String[] args) {
-        // 5. Tracker - хранилище [#285788]
+        Scanner con = new Scanner(System.in);
         Tracker tracker = new Tracker();
-
-        tracker.add(new Item("Запустить трекер"));
-        tracker.add(new Item("Проверить работу трекера"));
-        tracker.add(new Item("Проверить работу поиска по ID"));
-
-        System.out.println("\t1. Все элементы:");
-        System.out.println(Arrays.toString(tracker.findAll()));
-
-        System.out.println("\t2. Поиск по id = 2:");
-        System.out.println(tracker.findById(2));
-
-        System.out.println("\t3. Поиск по name = \"Запустить трекер\":");
-        System.out.println(Arrays.toString(tracker.findByName("Запустить трекер")));
-
-        System.out.println("\t4. Поиск по name = \"Нет такой задачи\":");
-        System.out.println(Arrays.toString(tracker.findByName("Нет такой задачи")));
-
-        // 6. Метод замены заявки. Tracker.replace [#285785]
-        System.out.println("\t5. Замена заявки:");
-        tracker.replace(2, new Item("Заменить заявку с id = 2"));
-        System.out.println(Arrays.toString(tracker.findAll()));
-
-        // 7. Метод удаления заявки Tracker.delete [#285786]
-        System.out.println("\t6. Удаление заявки:");
-        tracker.delete(2);
-        System.out.println(Arrays.toString(tracker.findAll()));
+        new StartUI().init(con, tracker);
     }
 }
