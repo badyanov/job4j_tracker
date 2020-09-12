@@ -1,25 +1,19 @@
 package ru.job4j.tracker;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
 /**
  * 2.1. Реализация класса StartUI [#285731]
  * @author d.badyanov@outlook.com
  */
 public class StartUI {
-    public void init(Scanner scanner, Tracker tracker) {
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
             this.showMenu();
-            System.out.print("Select: ");
-            int select = inputNumber(scanner);
-            // Решил попробовать через switch..case чисто для изучения, посмотреть как оно работает в 14 java
+            int select = inputNumber(input, "Select: ");
             switch (select) {
                 case 0 -> {
                     System.out.println("-= Create new item =-");
-                    System.out.print("Enter the name of new item: ");
-                    String itemName = scanner.nextLine();
+                    String itemName = input.askStr("Enter the name of new item: ");
                     Item newItem = new Item(itemName);
                     tracker.add(newItem);
                     System.out.println("The item was added successfully");
@@ -30,8 +24,7 @@ public class StartUI {
                 }
                 case 2 -> {
                     System.out.println("-= Edit item =-");
-                    System.out.print("Enter the ID: ");
-                    int id = inputNumber(scanner);
+                    int id = inputNumber(input, "Enter the ID: ");
                     Item foundItem = tracker.findById(id);
                     if (foundItem == null) {
                         System.out.println("Item not found...");
@@ -39,8 +32,7 @@ public class StartUI {
                     }
                     System.out.printf("Found the item \"%s\". Enter a new name and press Enter", foundItem.getName());
                     System.out.println();
-                    System.out.print("New name: ");
-                    String newName = scanner.nextLine();
+                    String newName = input.askStr("New name: ");
                     if (newName.isBlank()) {
                         System.out.println("Name was blank. Item has not been changed");
                         continue;
@@ -54,8 +46,7 @@ public class StartUI {
                 }
                 case 3 -> {
                     System.out.println("-= Deleting an item =-");
-                    System.out.print("Enter the ID: ");
-                    int id = inputNumber(scanner);
+                    int id = inputNumber(input, "Enter the ID: ");
                     Item foundItem = tracker.findById(id);
                     if (foundItem == null) {
                         System.out.println("Item not found...");
@@ -63,7 +54,7 @@ public class StartUI {
                     }
                     System.out.printf("The item \"%s\" will be deleted. Are you sure?", foundItem.getName());
                     System.out.println();
-                    if (!askYesOrNo(scanner)) {
+                    if (!askYesOrNo(input)) {
                         System.out.println("Item has not been deleted");
                         continue;
                     }
@@ -75,8 +66,7 @@ public class StartUI {
                 }
                 case 4 -> {
                     System.out.println("-= Find item by ID =-");
-                    System.out.print("Enter the ID: ");
-                    int id = inputNumber(scanner);
+                    int id = inputNumber(input, "Enter the ID: ");
                     Item foundItem = tracker.findById(id);
                     if (foundItem == null) {
                         System.out.println("Item not found...");
@@ -87,8 +77,7 @@ public class StartUI {
                 }
                 case 5 -> {
                     System.out.println("-= Find items by Name =-");
-                    System.out.print("Enter the Name (exactly): ");
-                    String searchKey = scanner.nextLine();
+                    String searchKey = input.askStr("Enter the Name (exactly): ");
                     if (searchKey.isBlank()) {
                         System.out.println("Incorrect name!");
                         continue;
@@ -109,10 +98,9 @@ public class StartUI {
         }
     }
 
-    private boolean askYesOrNo(Scanner scanner) {
+    private boolean askYesOrNo(Input input) {
         while (true) {
-            System.out.print("Y/N?: ");
-            String answer = scanner.nextLine();
+            String answer = input.askStr("Y/N?: ");
             if (answer.equalsIgnoreCase("Y")) {
                 return true;
             } else if (answer.equalsIgnoreCase("N")) {
@@ -121,10 +109,10 @@ public class StartUI {
         }
     }
 
-    private int inputNumber(Scanner scanner) {
+    private int inputNumber(Input input, String msgQuestion) {
         int result = -1;
         try {
-            result = Integer.parseInt(scanner.nextLine());
+            result = input.askInt(msgQuestion);
         } catch (NumberFormatException e) {
             System.out.println("Incorrect input! Enter the number");
         }
@@ -157,7 +145,7 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        Scanner con = new Scanner(System.in);
+        Input con = new ConsoleInput();
         Tracker tracker = new Tracker();
         new StartUI().init(con, tracker);
     }
