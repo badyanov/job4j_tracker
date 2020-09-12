@@ -26,7 +26,8 @@ public class Matches {
 
     private void startGameProcess() {
         Scanner con = new Scanner(System.in);
-        while (true) {
+        boolean gameMustGoOn = true;
+        while (gameMustGoOn) {
             String playerName = players[playerIndex];
             System.out.printf("Ходит %s:\n", playerName);
             int amount = inputAmountAndCheckResult(con);
@@ -34,9 +35,10 @@ public class Matches {
                 continue;
             }
             makeTurn(amount);
-            if (checkFinish()) {
-                System.out.printf("Игра окончена. Победил %s!\n", playerName);
-                break;
+            printState();
+            gameMustGoOn = checkFinish();
+            if (!gameMustGoOn) {
+                System.out.printf("<< %tT: Игра окончена. Победил %s!\n", new Date(), playerName);
             }
         }
     }
@@ -60,13 +62,12 @@ public class Matches {
     }
 
     private boolean checkFinish() {
-        return matchesLeft <= 0;
+        return matchesLeft > 0;
     }
 
     private void makeTurn(int amount) {
         matchesLeft -= amount;
         playerIndex = playerIndex == 0 ? 1 : 0;
-        printState();
     }
 
     private void printState() {
