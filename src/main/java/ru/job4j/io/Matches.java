@@ -31,11 +31,10 @@ public class Matches {
             playerName = players[playerIndex];
             System.out.printf("Ходит %s:\n", playerName);
             int amount = inputAmountAndCheckResult(con);
-            if (amount == 0) {
-                continue;
+            if (amount != 0) {
+                makeTurn(amount);
+                printState();
             }
-            makeTurn(amount);
-            printState();
         }
         System.out.printf("<< %tT: Игра окончена. Победил %s!\n", new Date(), playerName);
     }
