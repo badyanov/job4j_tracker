@@ -23,12 +23,12 @@ public class StartUI {
         }
     }
 
-    private static boolean exitFromTracker() {
+    public static boolean exitFromTracker() {
         System.out.println("-= Exit =-");
         return false;
     }
 
-    private static void findByName(Input input, Tracker tracker) {
+    public static void findByName(Input input, Tracker tracker) {
         System.out.println("-= Find items by Name =-");
         String searchKey = input.askStr("Enter the Name (exactly): ");
         if (!searchKey.isBlank()) {
@@ -44,7 +44,7 @@ public class StartUI {
         }
     }
 
-    private static void findById(Input input, Tracker tracker) {
+    public static void findById(Input input, Tracker tracker) {
         System.out.println("-= Find item by ID =-");
         int id = inputNumber(input, "Enter the ID: ");
         Item foundItem = tracker.findById(id);
@@ -56,7 +56,7 @@ public class StartUI {
         }
     }
 
-    private static void deleteItem(Input input, Tracker tracker) {
+    public static void deleteItem(Input input, Tracker tracker) {
         System.out.println("-= Deleting an item =-");
         int id = inputNumber(input, "Enter the ID: ");
         Item foundItem = tracker.findById(id);
@@ -77,7 +77,7 @@ public class StartUI {
         }
     }
 
-    private static void editItem(Input input, Tracker tracker) {
+    public static void editItem(Input input, Tracker tracker) {
         System.out.println("-= Edit item =-");
         int id = inputNumber(input, "Enter the ID: ");
         Item foundItem = tracker.findById(id);
@@ -105,7 +105,7 @@ public class StartUI {
         showItems(tracker.findAll());
     }
 
-    private static void createItem(Input input, Tracker tracker) {
+    public static void createItem(Input input, Tracker tracker) {
         System.out.println("-= Create new item =-");
         String itemName = input.askStr("Enter the name of new item: ");
         Item newItem = new Item(itemName);
