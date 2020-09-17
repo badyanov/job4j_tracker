@@ -21,4 +21,17 @@ public class StubInput implements Input {
     public int askInt(String question) {
         return Integer.parseInt(askStr(question));
     }
+
+    @Override
+    public boolean askYesOrNo(String question) {
+        String answer = answers[position++];
+        if (answer.equalsIgnoreCase("Y")) {
+            return true;
+        } else if (answer.equalsIgnoreCase("N")) {
+            return false;
+        } else {
+            System.out.println("Incorrect input!");
+            return false;
+        }
+    }
 }

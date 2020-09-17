@@ -15,8 +15,30 @@ public class ConsoleInput implements Input {
         return con.nextLine();
     }
 
+    /**
+     * Ввод целого неотрицательного числа с консоли
+     * @param question - подсказка ввода, которая будет выведена в строке ввода
+     * @return введенное корректное число, либо -1 в любом другом случае
+     */
     @Override
     public int askInt(String question) {
-        return Integer.parseInt(askStr(question));
+        int result = -1;
+        try {
+            result = Integer.parseInt(askStr(question));
+        } catch (NumberFormatException e) {
+            System.out.println("Incorrect input! Enter the number");
+        }
+        return (result >= 0) ? result : -1;
+    }
+
+    public boolean askYesOrNo(String question) {
+        while (true) {
+            String answer = askStr(question + " (Y/N?): ");
+            if (answer.equalsIgnoreCase("Y")) {
+                return true;
+            } else if (answer.equalsIgnoreCase("N")) {
+                return false;
+            }
+        }
     }
 }
