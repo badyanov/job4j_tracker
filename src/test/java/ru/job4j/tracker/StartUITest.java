@@ -2,49 +2,54 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
     @Test
-    public void whenAddNewItem() {
-        String taskName = "Run test";
-        String[] answers = {taskName};
+    public void whenCreateItem() {
+        Input in = new StubInput(
+                new String[] {"0", "Item name", "1"}
+        );
         Tracker tracker = new Tracker();
-        Input input = new StubInput(answers);
-        UserAction action = new CreateAction();
-        action.execute(input, tracker);
-        Item itemCreated = tracker.findAll()[0];
-        Item itemExpected = new Item(taskName);
-        assertThat(itemCreated.getName(), is(itemExpected.getName()));
+        UserAction[] actions = {
+                new CreateAction(),
+                new ExitAction()
+        };
+        new StartUI().init(in, tracker, actions);
+        assertThat(tracker.findAll()[0].getName(), is("Item name"));
     }
 
     @Test
     public void whenReplaceItem() {
-        String replacedName = "Replaced item";
         Tracker tracker = new Tracker();
-        Item item = new Item("Old name");
-        tracker.add(item);
-        int id = item.getId();
-        String[] answers = {String.valueOf(id), replacedName};
-        Input input = new StubInput(answers);
-        UserAction action = new EditAction();
-        action.execute(input, tracker);
-        Item itemReplaced = tracker.findById(id);
-        assertThat(itemReplaced.getName(), is(replacedName));
+        Item item = tracker.add(new Item("Replaced item"));
+        String replacedName = "New item name";
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(item.getId()), replacedName, "1"}
+        );
+        UserAction[] actions = {
+                new EditAction(),
+                new ExitAction()
+        };
+        new StartUI().init(in, tracker, actions);
+        Item replacedItem = tracker.findById(item.getId());
+        assertThat(replacedItem.getName(), is(replacedName));
     }
 
     @Test
     public void whenDeleteItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item("Task which will be deleted");
-        tracker.add(item);
-        int id = item.getId();
-        String[] answers = {String.valueOf(id), "Y"};
-        Input input = new StubInput(answers);
-        UserAction action = new DeleteAction();
-        action.execute(input, tracker);
-        Item itemDeleted = tracker.findById(id);
-        assertNull(itemDeleted);
+        Item item = tracker.add(new Item("Deleted item"));
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(item.getId()), "Y", "1"}
+        );
+        UserAction[] actions = {
+                new DeleteAction(),
+                new ExitAction()
+        };
+        new StartUI().init(in, tracker, actions);
+        assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
 }
