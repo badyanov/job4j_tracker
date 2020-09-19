@@ -10,8 +10,8 @@ public class ConsoleInput implements Input {
     private Scanner con = new Scanner(System.in);
 
     @Override
-    public String askStr(String question) {
-        System.out.print(question);
+    public String askStr(Output out, String question) {
+        out.print(question);
         return con.nextLine();
     }
 
@@ -21,19 +21,19 @@ public class ConsoleInput implements Input {
      * @return введенное корректное число, либо -1 в любом другом случае
      */
     @Override
-    public int askInt(String question) {
+    public int askInt(Output out, String question) {
         int result = -1;
         try {
-            result = Integer.parseInt(askStr(question));
+            result = Integer.parseInt(askStr(out, question));
         } catch (NumberFormatException e) {
-            System.out.println("Incorrect input! Enter the number");
+            out.println("Incorrect input! Enter the number");
         }
         return (result >= 0) ? result : -1;
     }
 
-    public boolean askYesOrNo(String question) {
+    public boolean askYesOrNo(Output out, String question) {
         while (true) {
-            String answer = askStr(question + " (Y/N?): ");
+            String answer = askStr(out, question + " (Y/N?): ");
             if (answer.equalsIgnoreCase("Y")) {
                 return true;
             } else if (answer.equalsIgnoreCase("N")) {

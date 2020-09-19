@@ -13,24 +13,24 @@ public class StubInput implements Input {
     }
 
     @Override
-    public String askStr(String question) {
+    public String askStr(Output out, String question) {
         return answers[position++];
     }
 
     @Override
-    public int askInt(String question) {
-        return Integer.parseInt(askStr(question));
+    public int askInt(Output out, String question) {
+        return Integer.parseInt(askStr(out, question));
     }
 
     @Override
-    public boolean askYesOrNo(String question) {
+    public boolean askYesOrNo(Output out, String question) {
         String answer = answers[position++];
         if (answer.equalsIgnoreCase("Y")) {
             return true;
         } else if (answer.equalsIgnoreCase("N")) {
             return false;
         } else {
-            System.out.println("Incorrect input!");
+            out.println("Incorrect input!");
             return false;
         }
     }

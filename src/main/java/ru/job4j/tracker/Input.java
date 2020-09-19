@@ -5,9 +5,9 @@ package ru.job4j.tracker;
  * @author d.badyanov@outlook.com
  */
 public interface Input {
-    String askStr(String question);
+    String askStr(Output out, String question);
 
-    int askInt(String question);
+    int askInt(Output out, String question);
 
-    boolean askYesOrNo(String question);
+    boolean askYesOrNo(Output out, String question);
 }

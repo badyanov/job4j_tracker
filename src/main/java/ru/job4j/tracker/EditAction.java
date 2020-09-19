@@ -4,6 +4,12 @@ package ru.job4j.tracker;
  * 8. Реализация меню за счет шаблона стратегия. [#285728]
  */
 public class EditAction implements UserAction {
+    private Output out;
+
+    public EditAction(Output out) {
+        this.out = out;
+    }
+
     @Override
     public String name() {
         return "Edit item";
@@ -11,25 +17,25 @@ public class EditAction implements UserAction {
 
     @Override
     public boolean execute(Input input, Tracker tracker) {
-        System.out.println();
-        int id = input.askInt("Enter the ID: ");
+        out.println();
+        int id = input.askInt(out, "Enter the ID: ");
         Item foundItem = tracker.findById(id);
         if (foundItem != null) {
-            System.out.printf("Found the item \"%s\". Enter a new name and press Enter", foundItem.getName());
-            System.out.println();
-            String newName = input.askStr("New name: ");
+            out.printf("Found the item \"%s\". Enter a new name and press Enter", foundItem.getName());
+            out.println();
+            String newName = input.askStr(out, "New name: ");
             if (!newName.isBlank()) {
                 Item newItem = new Item(newName);
                 if (tracker.replace(id, newItem)) {
-                    System.out.println("Item was renamed successfully");
+                    out.println("Item was renamed successfully");
                 } else {
-                    System.out.println("Error! Item has not been changed.");
+                    out.println("Error! Item has not been changed.");
                 }
             } else {
-                System.out.println("Name was blank. Item has not been changed");
+                out.println("Name was blank. Item has not been changed");
             }
         } else {
-            System.out.println("Item not found...");
+            out.println("Item not found...");
         }
         return true;
     }
