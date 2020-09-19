@@ -15,10 +15,12 @@ public class FindByIdAction implements UserAction {
         int id = input.askInt("Enter the ID: ");
         Item foundItem = tracker.findById(id);
         if (foundItem != null) {
-            Item[] foundItems = {foundItem};
-            CommonMethods.showItems(foundItems);
+            System.out.println("Search results: found 1 item:");
+            System.out.println("--------------------------------------------------------------------------------------------------------------");
+            System.out.printf("| %-2d | %-100s |" + System.lineSeparator(), foundItem.getId(), foundItem.getName());
+            System.out.println("--------------------------------------------------------------------------------------------------------------");
         } else {
-            System.out.println("Item not found...");
+            System.out.println("Search result: item not found...");
         }
         return true;
     }

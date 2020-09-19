@@ -15,10 +15,12 @@ public class FindByNameAction implements UserAction {
         String searchKey = input.askStr("Enter the Name (exactly): ");
         if (!searchKey.isBlank()) {
             Item[] foundItems = tracker.findByName(searchKey);
-            System.out.println("Search results:");
-            // Так как метод showItems использовался у меня в нескольких местах, вывел его в отдельный класс
-            // Не придумал, как это лучше реализовать в данном случае
-            CommonMethods.showItems(foundItems);
+            System.out.println("Search results: found "+ foundItems.length + " items:");
+            System.out.println("--------------------------------------------------------------------------------------------------------------");
+            for (Item item : foundItems) {
+                System.out.printf("| %-2d | %-100s |" + System.lineSeparator(), item.getId(), item.getName());
+            }
+            System.out.println("--------------------------------------------------------------------------------------------------------------");
         } else {
             System.out.println("Incorrect name!");
         }
