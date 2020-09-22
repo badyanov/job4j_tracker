@@ -24,12 +24,12 @@ public class StartUI {
     }
 
     private void showMenu(UserAction[] actions) {
-        out.println();
-        out.println("=== Tracker's Menu ===");
+        System.out.println();
+        System.out.println("=== Tracker's Menu ===");
         for (int i = 0; i < actions.length; i++) {
-            out.printf("%d. %s" + System.lineSeparator(), i, actions[i].name());
+            System.out.printf("%d. %s" + System.lineSeparator(), i, actions[i].name());
         }
-        out.println("======================");
+        System.out.println("======================");
     }
 
     public static void main(String[] args) {
