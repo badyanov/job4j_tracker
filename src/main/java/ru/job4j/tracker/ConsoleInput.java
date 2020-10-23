@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * 4.1. Разрыв зависимости StartUI от Scanner. [#285726]
+ *
  * @author d.badyanov@outlook.com
  */
 public class ConsoleInput implements Input {
@@ -17,18 +18,13 @@ public class ConsoleInput implements Input {
 
     /**
      * Ввод целого неотрицательного числа с консоли
+     *
      * @param question - подсказка ввода, которая будет выведена в строке ввода
-     * @return введенное корректное число, либо -1 в любом другом случае
+     * @return введенное число. Обработка ошибок ввода не предусмотрена!
      */
     @Override
     public int askInt(Output out, String question) {
-        int result = -1;
-        try {
-            result = Integer.parseInt(askStr(out, question));
-        } catch (NumberFormatException e) {
-            out.println("Incorrect input! Enter the number");
-        }
-        return (result >= 0) ? result : -1;
+        return Integer.parseInt(askStr(out, question));
     }
 
     public boolean askYesOrNo(Output out, String question) {

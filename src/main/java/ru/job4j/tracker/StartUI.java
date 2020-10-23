@@ -19,6 +19,8 @@ public class StartUI {
             if (select >= 0 && select < actions.length) {
                 UserAction action = actions[select];
                 run = action.execute(input, tracker);
+            } else {
+                out.printf("Wrong input! You can select a number from 0 to %d%n", actions.length - 1);
             }
         }
     }
@@ -33,7 +35,7 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        Input con = new ConsoleInput();
+        Input con = new ValidateInput();
         Output out = new ConsoleOutput();
         Tracker tracker = new Tracker();
         UserAction[] actions = {
