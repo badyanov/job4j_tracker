@@ -136,22 +136,24 @@ public class StartUITest {
     }
 
     /**
-     * 1.1. Тесты на ValidateInput. [#285744]
+     * 2. Рефакторинг - Шаблон Декоратор для валидатора. [#285736]
      */
     @Test
     public void whenInvalidExit() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[]{"1", "0"}
+                new String[]{"Exit", "1", "0"}
         );
+        Input validateInput = new ValidateInput(out, in);
         Tracker tracker = new Tracker();
         UserAction[] actions = {
                 new ExitAction(out)
         };
-        new StartUI(out).init(in, tracker, actions);
+        new StartUI(out).init(validateInput, tracker, actions);
         assertThat(out.toString(), is(
                 String.format(
-                        "Wrong input! You can select a number from 0 to 0%n"
+                        "Incorrect input! Enter the number%n"
+                        + "Wrong input! You can select a number from 0 to 0%n"
                         + "The Tracker has closed. Goodbye!%n"
                 )
         ));
