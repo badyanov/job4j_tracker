@@ -12,7 +12,7 @@ public class StartUITest {
     public void whenCreateItem() {
         Output out = new ConsoleOutput();
         Input in = new StubInput(
-                new String[] {"0", "Item name", "1"}
+                new String[]{"0", "Item name", "1"}
         );
         Tracker tracker = new Tracker();
         UserAction[] actions = {
@@ -30,7 +30,7 @@ public class StartUITest {
         String replacedName = "New item name";
         Output out = new ConsoleOutput();
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(item.getId()), replacedName, "1"}
+                new String[]{"0", String.valueOf(item.getId()), replacedName, "1"}
         );
         UserAction[] actions = {
                 new EditAction(out),
@@ -47,7 +47,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("Deleted item"));
         Output out = new ConsoleOutput();
         Input in = new StubInput(
-                new String[] {"0", String.valueOf(item.getId()), "Y", "1"}
+                new String[]{"0", String.valueOf(item.getId()), "Y", "1"}
         );
         UserAction[] actions = {
                 new DeleteAction(out),
@@ -65,7 +65,7 @@ public class StartUITest {
         tracker.add(new Item("Third task"));
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"0", "1"}
+                new String[]{"0", "1"}
         );
         UserAction[] actions = {
                 new ShowAllAction(out),
@@ -92,7 +92,7 @@ public class StartUITest {
         tracker.add(new Item("The Same Task"));
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"0", "the same task", "1"}
+                new String[]{"0", "the same task", "1"}
         );
         UserAction[] actions = {
                 new FindByNameAction(out),
@@ -111,14 +111,14 @@ public class StartUITest {
     }
 
     @Test
-    public void whenFindById () {
+    public void whenFindById() {
         Tracker tracker = new Tracker();
         tracker.add(new Item("First task with ID = 1"));
         tracker.add(new Item("Second task with ID = 2"));
         tracker.add(new Item("Third task with ID = 3"));
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"0", "2", "1"}
+                new String[]{"0", "2", "1"}
         );
         UserAction[] actions = {
                 new FindByIdAction(out),
@@ -133,5 +133,27 @@ public class StartUITest {
                 "The Tracker has closed. Goodbye!" + EOL;
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is(matcher));
+    }
+
+    /**
+     * 1.1. Тесты на ValidateInput. [#285744]
+     */
+    @Test
+    public void whenInvalidExit() {
+        Output out = new StubOutput();
+        Input in = new StubInput(
+                new String[]{"1", "0"}
+        );
+        Tracker tracker = new Tracker();
+        UserAction[] actions = {
+                new ExitAction(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        assertThat(out.toString(), is(
+                String.format(
+                        "Wrong input! You can select a number from 0 to 0%n"
+                        + "The Tracker has closed. Goodbye!%n"
+                )
+        ));
     }
 }
