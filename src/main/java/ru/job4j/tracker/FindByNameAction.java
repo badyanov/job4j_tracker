@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+
 /**
  * 8. Реализация меню за счет шаблона стратегия. [#285728]
  */
@@ -20,8 +22,8 @@ public class FindByNameAction implements UserAction {
         out.println();
         String searchKey = input.askStr(out, "Enter the Name (exactly): ");
         if (!searchKey.isBlank()) {
-            Item[] foundItems = tracker.findByName(searchKey);
-            out.println("Search results: found "+ foundItems.length + " items:");
+            List<Item> foundItems = tracker.findByName(searchKey);
+            out.println("Search results: found "+ foundItems.size() + " items:");
             out.println("--------------------------------------------------------------------------------------------------------------");
             for (Item item : foundItems) {
                 out.printf("| %-2d | %-100s |" + System.lineSeparator(), item.getId(), item.getName());

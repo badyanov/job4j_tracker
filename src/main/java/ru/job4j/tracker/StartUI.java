@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 /**
+ * 6. Изменить программу Tracker из 2-го модуля [#285704]
  * 8. Реализация меню за счет шаблона стратегия. [#285728]
  * @author d.badyanov@outlook.com
  */
