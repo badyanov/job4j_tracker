@@ -7,7 +7,7 @@ import java.util.List;
  * 6. Изменить программу Tracker из 2-го модуля [#285704]
  */
 public class Tracker {
-    private final List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
     private int ids = 1;
 
     public Item add(Item item) {
