@@ -20,7 +20,7 @@ public class User implements Comparable<User> {
         if (result != 0) {
             return result;
         }
-        result = age - other.age;
+        result = Integer.compare(age, other.age);
         return result;
     }
 
