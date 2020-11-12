@@ -1,7 +1,9 @@
 package ru.job4j.collection;
 
+import java.util.Objects;
+
 /**
- * 0. Сортировка [#285697]
+ * 2. Комбинированный компаратор. [#285696]
  */
 public class Job implements Comparable<Job>{
     private String name;
@@ -32,5 +34,19 @@ public class Job implements Comparable<Job>{
     @Override
     public int compareTo(Job another) {
         return Integer.compare(priority, another.getPriority());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return priority == job.priority &&
+                Objects.equals(name, job.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, priority);
     }
 }
