@@ -55,6 +55,4 @@ public class Profession {
         this.hired = false;
         this.salary = 0;
     }
-
-
 }

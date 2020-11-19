@@ -21,7 +21,8 @@ public class DeleteAction implements UserAction {
         int id = input.askInt(out, "Enter the ID: ");
         Item foundItem = tracker.findById(id);
         if (foundItem != null) {
-            String question = String.format("The item \"%s\" will be deleted. Are you sure?", foundItem.getName());
+            String question = String.format("The item \"%s\" will be deleted. Are you sure?",
+                    foundItem.getName());
             if (input.askYesOrNo(out, question)) {
                 if (tracker.delete(id)) {
                     out.println("Item was deleted successfully");

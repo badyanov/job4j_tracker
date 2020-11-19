@@ -17,6 +17,7 @@ public class ShowAllAction implements UserAction {
         return "Show all items";
     }
 
+    @SuppressWarnings("checkstyle:LineLength")
     @Override
     public boolean execute(Input input, Tracker tracker) {
         out.println();

@@ -27,7 +27,6 @@ public class LexSortTest {
         assertThat(input, is(out));
     }
 
-
     @Test
     public void sortDifficultString() {
         String[] input = {

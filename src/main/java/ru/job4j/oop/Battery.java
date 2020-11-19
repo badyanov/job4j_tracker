@@ -16,7 +16,7 @@ public class Battery {
         this.load = load;
     }
 
-    public static void printStatus(Battery ... batteries) {
+    public static void printStatus(Battery... batteries) {
         String status = "";
         for (int i = 0; i < batteries.length; i++) {
             status += "Battery " + (i + 1) + ": " + batteries[i].load + "%; ";
@@ -25,7 +25,8 @@ public class Battery {
     }
 
     /**
-     * метод должен списывать заряд из батареи у кого вызывали метод exchange и добавить к объекту another
+     * метод должен списывать заряд из батареи у кого вызывали метод exchange
+     * и добавить к объекту another
      * заряд батареи не может быть больше 100%
      * @param another Battery
      */

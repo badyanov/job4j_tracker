@@ -6,6 +6,7 @@ public class Wolf {
     public Wolf() {
 
     }
+
     public Wolf(boolean canEat) {
         this.canEat = canEat;
     }

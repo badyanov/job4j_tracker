@@ -13,6 +13,7 @@ public class Police {
         license.setCode("xx111x");
         license.setCreated(new Date());
 
-        System.out.println(license.getOwner() + " has a car - " + license.getModel() + " : " + license.getCode() + " created on " + license.getCreated());
+        System.out.printf("%s has a car - %s : %s created on %s%n",
+                license.getOwner(), license.getModel(), license.getCode(), license.getCreated());
     }
 }

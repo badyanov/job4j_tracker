@@ -6,7 +6,7 @@ package ru.job4j.tracker;
 public interface Output {
     void print(Object obj);
 
-    void printf(String format, Object ... args);
+    void printf(String format, Object... args);
 
     void println();
 

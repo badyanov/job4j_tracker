@@ -57,8 +57,11 @@ public class StartUITest {
         assertThat(tracker.findById(item.getId()), is(nullValue()));
     }
 
+    @SuppressWarnings("checkstyle:LineLength")
     @Test
     public void whenFindAll() {
+        final String EOL = System.lineSeparator();
+
         Tracker tracker = new Tracker();
         tracker.add(new Item("First task"));
         tracker.add(new Item("Second task"));
@@ -71,21 +74,23 @@ public class StartUITest {
                 new ShowAllAction(out),
                 new ExitAction(out)
         };
-        String EOL = System.lineSeparator();
-        String matcher = EOL +
-                "There are 3 items:" + EOL +
-                "--------------------------------------------------------------------------------------------------------------" + EOL +
-                String.format("| %-2d | %-100s |", 1, "First task") + EOL +
-                String.format("| %-2d | %-100s |", 2, "Second task") + EOL +
-                String.format("| %-2d | %-100s |", 3, "Third task") + EOL +
-                "--------------------------------------------------------------------------------------------------------------" + EOL +
-                "The Tracker has closed. Goodbye!" + EOL;
+        String matcher = EOL
+                + "There are 3 items:" + EOL
+                + "--------------------------------------------------------------------------------------------------------------" + EOL
+                + String.format("| %-2d | %-100s |", 1, "First task") + EOL
+                + String.format("| %-2d | %-100s |", 2, "Second task") + EOL
+                + String.format("| %-2d | %-100s |", 3, "Third task") + EOL
+                + "--------------------------------------------------------------------------------------------------------------" + EOL
+                + "The Tracker has closed. Goodbye!" + EOL;
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is(matcher));
     }
 
+    @SuppressWarnings("checkstyle:LineLength")
     @Test
     public void whenFindByName() {
+        final String EOL = System.lineSeparator();
+
         Tracker tracker = new Tracker();
         tracker.add(new Item("The same task"));
         tracker.add(new Item("Another task"));
@@ -98,20 +103,22 @@ public class StartUITest {
                 new FindByNameAction(out),
                 new ExitAction(out)
         };
-        String EOL = System.lineSeparator();
-        String matcher = EOL +
-                "Search results: found 2 items:" + EOL +
-                "--------------------------------------------------------------------------------------------------------------" + EOL +
-                String.format("| %-2d | %-100s |", 1, "The same task") + EOL +
-                String.format("| %-2d | %-100s |", 3, "The Same Task") + EOL +
-                "--------------------------------------------------------------------------------------------------------------" + EOL +
-                "The Tracker has closed. Goodbye!" + EOL;
+        String matcher = EOL
+                + "Search results: found 2 items:" + EOL
+                + "--------------------------------------------------------------------------------------------------------------" + EOL
+                + String.format("| %-2d | %-100s |", 1, "The same task") + EOL
+                + String.format("| %-2d | %-100s |", 3, "The Same Task") + EOL
+                + "--------------------------------------------------------------------------------------------------------------" + EOL
+                + "The Tracker has closed. Goodbye!" + EOL;
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is(matcher));
     }
 
+    @SuppressWarnings("checkstyle:LineLength")
     @Test
     public void whenFindById() {
+        final String EOL = System.lineSeparator();
+
         Tracker tracker = new Tracker();
         tracker.add(new Item("First task with ID = 1"));
         tracker.add(new Item("Second task with ID = 2"));
@@ -124,13 +131,12 @@ public class StartUITest {
                 new FindByIdAction(out),
                 new ExitAction(out)
         };
-        String EOL = System.lineSeparator();
-        String matcher = EOL +
-                "Search results: found 1 item:" + EOL +
-                "--------------------------------------------------------------------------------------------------------------" + EOL +
-                String.format("| %-2d | %-100s |", 2, "Second task with ID = 2") + EOL +
-                "--------------------------------------------------------------------------------------------------------------" + EOL +
-                "The Tracker has closed. Goodbye!" + EOL;
+        String matcher = EOL
+                + "Search results: found 1 item:" + EOL
+                + "--------------------------------------------------------------------------------------------------------------" + EOL
+                + String.format("| %-2d | %-100s |", 2, "Second task with ID = 2") + EOL
+                + "--------------------------------------------------------------------------------------------------------------" + EOL
+                + "The Tracker has closed. Goodbye!" + EOL;
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is(matcher));
     }

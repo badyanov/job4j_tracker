@@ -7,10 +7,10 @@ public class Triangle implements Shape {
     @Override
     public String draw() {
         final String EOL = System.lineSeparator();
-        return "_______" + EOL +
-               "\\     /" + EOL +
-               " \\   / " + EOL +
-               "  \\ /  " + EOL +
-               "   V   ";
+        return   "_______" + EOL
+               + "\\     /" + EOL
+               + " \\   / " + EOL
+               +  "  \\ /  " + EOL
+               +   "   V   ";
     }
 }

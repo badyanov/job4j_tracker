@@ -13,6 +13,7 @@ public class Book {
         this.title = title;
         this.pages = pages;
     }
+
     public Book(String title, int pages) {
         this.author = "";
         this.title = title;

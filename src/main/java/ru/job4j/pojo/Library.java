@@ -63,7 +63,7 @@ public class Library {
      * @param book - книга
      * @param index - порядковый номер
      */
-    private static void bookInfo (Book book, int index) {
+    private static void bookInfo(Book book, int index) {
         System.out.printf("%d) %s (%s) - %d pages\n", index + 1, book.getTitle(), book.getAuthor(), book.getPages());
     }
 }

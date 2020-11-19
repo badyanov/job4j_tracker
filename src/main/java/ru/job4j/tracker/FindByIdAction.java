@@ -15,6 +15,7 @@ public class FindByIdAction implements UserAction {
         return "Find item by ID";
     }
 
+    @SuppressWarnings("checkstyle:LineLength")
     @Override
     public boolean execute(Input input, Tracker tracker) {
         out.println();

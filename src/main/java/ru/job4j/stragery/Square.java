@@ -7,9 +7,9 @@ public class Square implements Shape {
     @Override
     public String draw() {
         final String EOL = System.lineSeparator();
-        return " _____ " + EOL +
-               "|     |" + EOL +
-               "|     |" + EOL +
-               "|_____|";
+        return   " _____ " + EOL
+               + "|     |" + EOL
+               + "|     |" + EOL
+               + "|_____|";
     }
 }

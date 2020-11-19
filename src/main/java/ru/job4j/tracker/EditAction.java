@@ -21,7 +21,8 @@ public class EditAction implements UserAction {
         int id = input.askInt(out, "Enter the ID: ");
         Item foundItem = tracker.findById(id);
         if (foundItem != null) {
-            out.printf("Found the item \"%s\". Enter a new name and press Enter", foundItem.getName());
+            out.printf("Found the item \"%s\". Enter a new name and press Enter",
+                    foundItem.getName());
             out.println();
             String newName = input.askStr(out, "New name: ");
             if (!newName.isBlank()) {

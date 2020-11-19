@@ -13,8 +13,10 @@ public class Bus implements Transport {
 
     @Override
     public int refuelAndGetPrice(int amountLiters) {
+        final String EOL = System.lineSeparator();
         int price = 48 * amountLiters;
-        System.out.printf("The bus has refueled for %d liters. Checkout %d rub." + System.lineSeparator(), amountLiters, price);
+        System.out.printf("The bus has refueled for %d liters. Checkout %d rub." + EOL,
+                amountLiters, price);
         return price;
     }
 
