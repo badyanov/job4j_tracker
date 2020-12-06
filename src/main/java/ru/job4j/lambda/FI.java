@@ -1,5 +1,6 @@
 package ru.job4j.lambda;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 /**
@@ -21,5 +22,16 @@ public class FI {
             System.out.printf("Compare the lengths of strings (descending): %d - %d%n", left.length(), right.length());
             return Integer.compare(right.length(), left.length());
         };
+
+        // 2.5. Ленивая загрузка [#285559]
+        String[] names = {
+                "Ivan",
+                "Petr"
+        };
+        Comparator<String> lengthCmp = (left, right) -> {
+            System.out.println("execute comparator");
+            return left.length() - right.length();
+        };
+        Arrays.sort(names, lengthCmp);
     }
 }
