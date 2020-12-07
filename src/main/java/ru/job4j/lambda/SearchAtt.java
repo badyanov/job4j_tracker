@@ -9,7 +9,27 @@ import java.util.function.Predicate;
  * 2.0. Встроенные функциональные интерфейсы. [#285557]
  */
 public class SearchAtt {
-    public static List<Attachment> filter(List<Attachment> list, Predicate<Attachment> condition) {
+    public static List<Attachment> filterSize(List<Attachment> list) {
+        Predicate<Attachment> condition = new Predicate<Attachment>() {
+            @Override
+            public boolean test(Attachment a) {
+                return a.getSize() >= 100;
+            }
+        };
+        return filter(list, condition);
+    }
+
+    public static List<Attachment> filterName(List<Attachment> list) {
+        Predicate<Attachment> condition = new Predicate<Attachment>() {
+            @Override
+            public boolean test(Attachment a) {
+                return a.getName().contains("bug");
+            }
+        };
+        return filter(list, condition);
+    }
+
+    private static List<Attachment> filter(List<Attachment> list, Predicate<Attachment> condition) {
         List<Attachment> result = new ArrayList<>();
         for (Attachment att : list) {
             if (condition.test(att)) {
@@ -29,11 +49,11 @@ public class SearchAtt {
         List<Attachment> result = new ArrayList<>();
 
         // 1. фильтр size >= 100
-        result = filter(attachments, a -> a.getSize() >= 100);
+        result = filterSize(attachments);
         System.out.println(result);
 
         // 2. фильтр name содержит 'bug'
-        result = filter(attachments, a -> a.getName().contains("bug"));
+        result = filterName(attachments);
         System.out.println(result);
 
     }
