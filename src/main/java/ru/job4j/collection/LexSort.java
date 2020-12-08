@@ -13,13 +13,7 @@ public class LexSort implements Comparator<String> {
         String[] ar1 = s1.split(regex, 2);
         String[] ar2 = s2.split(regex, 2);
 
-        if (ar1.length > 0 && ar2.length > 0) {
-            int result = Integer.compare(strToInt(ar1[0]), strToInt(ar2[0]));
-            if (result != 0) {
-                return result;
-            }
-        }
-        return s1.compareTo(s2);
+        return Integer.compare(strToInt(ar1[0]), strToInt(ar2[0]));
     }
 
     private int strToInt(String s) {
