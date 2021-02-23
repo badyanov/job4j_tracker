@@ -55,15 +55,13 @@ public class SchoolTest {
     @Test
     public void whenCollectClassC() {
         School sc = new School();
-        Predicate<Student> pr = (s) -> (s.getScore() > 0 && s.getScore() < 70);
+        Predicate<Student> pr = (s) -> (s.getScore() > 0 && s.getScore() < 50);
         List<Student> rsl = sc.collect(students, pr);
         List<Student> expected = new ArrayList<>();
         expected.add(new Student(10, "Surname1"));
         expected.add(new Student(20, "Surname2"));
         expected.add(new Student(30, "Surname3"));
         expected.add(new Student(40, "Surname4"));
-        expected.add(new Student(50, "Surname5"));
-        expected.add(new Student(60, "Surname6"));
         assertThat(rsl, is(expected));
     }
 }
