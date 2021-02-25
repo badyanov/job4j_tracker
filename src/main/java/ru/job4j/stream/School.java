@@ -17,10 +17,10 @@ public class School {
 
     public Map<String, Student> map(List<Student> students) {
         return students.stream()
-                .distinct()
                 .collect(Collectors.toMap(
                         s -> s.getSurname(),
-                        s -> s
+                        s -> s,
+                        (s1, s2) -> s1
                 ));
     }
 }
