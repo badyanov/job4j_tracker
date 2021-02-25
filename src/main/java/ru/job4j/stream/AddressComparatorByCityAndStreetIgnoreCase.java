@@ -4,8 +4,9 @@ import java.util.Comparator;
 
 /**
  * 3. Уникальность элементов и сортировка. [#285565]
+ * Сортировка без учета регистра символов
  */
-public class AddressComparatorByCityAndStreet implements Comparator<Address> {
+public class AddressComparatorByCityAndStreetIgnoreCase implements Comparator<Address> {
 
     @Override
     public int compare(Address a1, Address a2) {

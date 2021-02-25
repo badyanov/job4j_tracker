@@ -20,16 +20,16 @@ public class ProfilesTest {
 
     @Before
     public void setUp() {
-        list.add(new Profile(new Address("SPb", "Nevskiy prospekt", 1, 1)));
-        list.add(new Profile(new Address("Msk", "Tverskaya street", 13, 31)));
-        list.add(new Profile(new Address("SPb", "Bolshoy prospekt V.O.", 5, 5)));
-        list.add(new Profile(new Address("Sochi", "Vinogradnaya street", 123, 23)));
-        list.add(new Profile(new Address("SPb", "Nevskiy prospekt", 1, 1)));
-        list.add(new Profile(new Address("SPb", "Marata street", 11, 111)));
-        list.add(new Profile(new Address("Msk", "Akademika Koroleva street", 12, 52)));
-        list.add(new Profile(new Address("Msk", "Tverskaya street", 13, 31)));
-        list.add(new Profile(new Address("Kaliningrad", "Kanta street", 1, 1)));
-        list.add(new Profile(new Address("Sochi", "Vinogradnaya street", 123, 23)));
+        list.add(new Profile(new Address("spb", "Nevskiy prospekt", 1, 1)));
+        list.add(new Profile(new Address("msk", "Tverskaya street", 13, 31)));
+        list.add(new Profile(new Address("spb", "Bolshoy prospekt V.O.", 5, 5)));
+        list.add(new Profile(new Address("sochi", "Vinogradnaya street", 123, 23)));
+        list.add(new Profile(new Address("spb", "Nevskiy prospekt", 1, 1)));
+        list.add(new Profile(new Address("spb", "Marata street", 11, 111)));
+        list.add(new Profile(new Address("msk", "Akademika Koroleva street", 12, 52)));
+        list.add(new Profile(new Address("msk", "Tverskaya street", 13, 31)));
+        list.add(new Profile(new Address("kaliningrad", "Kanta street", 1, 1)));
+        list.add(new Profile(new Address("sochi", "Vinogradnaya street", 123, 23)));
     }
 
     @Test
@@ -38,20 +38,23 @@ public class ProfilesTest {
         List<Address> result = pr.collect(list);
 
         List<Address> expected = new ArrayList<>();
-        expected.add(new Address("Kaliningrad", "Kanta street", 1, 1));
-        expected.add(new Address("Msk", "Akademika Koroleva street", 12, 52));
-        expected.add(new Address("Msk", "Tverskaya street", 13, 31));
-        expected.add(new Address("Sochi", "Vinogradnaya street", 123, 23));
-        expected.add(new Address("SPb", "Bolshoy prospekt V.O.", 5, 5));
-        expected.add(new Address("SPb", "Marata street", 11, 111));
-        expected.add(new Address("SPb", "Nevskiy prospekt", 1, 1));
+        expected.add(new Address("kaliningrad", "Kanta street", 1, 1));
+        expected.add(new Address("msk", "Akademika Koroleva street", 12, 52));
+        expected.add(new Address("msk", "Tverskaya street", 13, 31));
+        expected.add(new Address("sochi", "Vinogradnaya street", 123, 23));
+        expected.add(new Address("spb", "Bolshoy prospekt V.O.", 5, 5));
+        expected.add(new Address("spb", "Marata street", 11, 111));
+        expected.add(new Address("spb", "Nevskiy prospekt", 1, 1));
 
         assertThat(result, is(expected));
     }
 
+    /**
+     * Сравнение без учета регистра символов
+     */
     @Test
     public void addressComparatorTest() {
-        Comparator<Address> compatator = new AddressComparatorByCityAndStreet();
+        Comparator<Address> compatator = new AddressComparatorByCityAndStreetIgnoreCase();
 
         Address a1 = new Address("Kaliningrad", "Kanta street", 1, 1);
         Address a2 = new Address("Msk", "Akademika Koroleva street", 12, 52);
