@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * 3. Банковские переводы. [#285709]
+ * 6. Тестовое задание из модуля коллекции Lite переделать на Stream API. [#285561]
  */
 public class BankService {
     private Map<User, List<Account>> users = new HashMap<>();
@@ -20,26 +21,19 @@ public class BankService {
     }
 
     public User findByPassport(String passport) {
-        User result = null;
-        for (User user : users.keySet()) {
-            if (passport.equals(user.getPassport())) {
-                result = user;
-                break;
-            }
-        }
-        return result;
+        return users.keySet()
+                .stream()
+                .filter(u -> passport.equals(u.getPassport()))
+                .findFirst()
+                .orElse(null);
     }
 
     public Account findByRequisite(String passport, String requisite) {
-        Account result = null;
         List<Account> accounts = findAccountsByPassport(passport);
-        for (Account account : accounts) {
-            if (requisite.equals(account.getRequisite())) {
-                result = account;
-                break;
-            }
-        }
-        return result;
+        return accounts.stream()
+                .filter(a -> requisite.equals(a.getRequisite()))
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite,
