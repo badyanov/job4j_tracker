@@ -12,19 +12,20 @@ import static org.junit.Assert.*;
 
 /**
  * 3. Модели данных и HashSet. [#285714]
+ * 1. Улучшения Collection API [#285573]
  */
 public class NotifyAccountTest {
 
     @Test
     public void sentTest() {
-        List<Account> accounts = Arrays.asList(
+        List<Account> accounts = List.of(
                 new Account("7777123456", "Petr Arsentev", "40817810570000123456"),
                 new Account("7508123456", "Dmitriy Badyanov", "40817810570000555555"),
                 new Account("7777123456", "Petr Arsentev", "40817810570000987654"),
                 new Account("4004123456", "Ivan Ivanov", "40817810570000111111")
         );
         HashSet<Account> expect = new HashSet<>(
-                Arrays.asList(
+                List.of(
                         new Account("7777123456", "Petr Arsentev", "40817810570000123456"),
                         new Account("7508123456", "Dmitriy Badyanov", "40817810570000555555"),
                         new Account("4004123456", "Ivan Ivanov", "40817810570000111111")
