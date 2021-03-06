@@ -8,7 +8,7 @@ import java.util.function.Predicate;
  * 6. Функции высшего порядка [#285550]
  */
 public class PhoneDictionary {
-    private ArrayList<Person> persons = new ArrayList<>();
+    private ArrayList<Person> persons = new ArrayList<Person>();
 
     public void add(Person person) {
         this.persons.add(person);
@@ -20,13 +20,13 @@ public class PhoneDictionary {
         Predicate<Person> predicatePhone = t -> t.getPhone().contains(key);
         Predicate<Person> predicateAddress = t -> t.getAddress().contains(key);
 
-        Predicate<Person> combine = predicateName
+        var combine = predicateName
                 .or(predicateSurname)
                 .or(predicatePhone)
                 .or(predicateAddress);
 
-        ArrayList<Person> result = new ArrayList<>();
-        for (Person person : persons) {
+        var result = new ArrayList<Person>();
+        for (var person : persons) {
             if (combine.test(person)) {
                 result.add(person);
             }

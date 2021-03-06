@@ -9,8 +9,8 @@ public class PriorityQueue {
     private LinkedList<Task> tasks = new LinkedList<>();
 
     public void put(Task newTask) {
-        int index = 0;
-        for (Task task : tasks) {
+        var index = 0;
+        for (var task : tasks) {
             if (task.getPriority() > newTask.getPriority()) {
                 break;
             }
@@ -25,8 +25,8 @@ public class PriorityQueue {
 
     @Override
     public String toString() {
-        StringBuilder output = new StringBuilder();
-        for (Task task : tasks) {
+        var output = new StringBuilder();
+        for (var task : tasks) {
             output.append(String.format("%s(%d), ", task.getDesc(), task.getPriority()));
         }
         return output.toString();

@@ -16,23 +16,23 @@ public class PhoneDictionaryTest {
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        ArrayList<Person> persons = phones.find("Petr");
+        var persons = phones.find("Petr");
         assertThat(persons.get(0).getSurname(), is("Arsentev"));
     }
 
     @Test
     public void whenDidNotFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
-        ArrayList<Person> persons = phones.find("Dmitriy");
+        var persons = phones.find("Dmitriy");
         assertThat(persons.size(), is(0));
     }
 
     @Test
     public void whenFindAllFromSPb() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
@@ -45,7 +45,7 @@ public class PhoneDictionaryTest {
         phones.add(
                 new Person("Ivan", "Ivanov", "1234567", "SPb")
         );
-        ArrayList<Person> persons = phones.find("SPb");
+        var persons = phones.find("SPb");
         assertThat(persons.size(), is(2));
     }
 }
