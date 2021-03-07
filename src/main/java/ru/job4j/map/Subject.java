@@ -3,7 +3,7 @@ package ru.job4j.map;
 import java.util.Objects;
 
 /**
- * 6. Тестовое задание из модуля коллекции Lite переделать на Stream API. [#285561]
+ * 3. Optional в банковских переводах. [#285575]
  */
 public class Subject {
     private String name;
